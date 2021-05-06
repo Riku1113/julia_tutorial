@@ -214,6 +214,8 @@ l = [1, 2, 3]
 
 l = []
 
+typeof(l)
+
 l = []
 isempty(l)
 
@@ -242,6 +244,9 @@ deleteat!(l, 3)
 
 l[2:4]
 #リストlの2番目から4番目までの要素を取得
+
+a = collect(1:5)
+c = @view(a[2:4])
 
 maximum(l)
 
@@ -893,25 +898,14 @@ n = 30
 x = range(-3, 3, length = n)
 y = range(-3, 3, length = n)
 
-#xとyを配列に変換する
-xx = collect(x)
-yy = collect(y)
-
-#zも配列を用意し、0で初期化
-z = zeros(n, n)
-
-#z = x^2 + y^2
-for i in 1:n
-    for j in 1:n
-        z[i, j] = xx[i]^2 + yy[j]^2
-    end
-end
+f(x, y) = x^2 + y^2
+z = f.(x', y)
 
 #表示するグラフのサイズを指定(しなくともよい)
 fig = figure("pyplot_surfaceplot", figsize = (10, 10))
 
 #グラフを描画
-plot_surface(xx, yy, z, color = :yellow)
+plot_surface(x, y, z, color = :yellow)
 xlabel("x")
 ylabel("y")
 zlabel("z")
@@ -1155,8 +1149,15 @@ inv(A)
 #元の行列と逆行列を掛けると単位行列になるため、正しく計算が行われていることがわかる
 A * inv(A)
 
+A = [1 2 3; 4 1 6; 7 8 1]
+b = 3:5
+#連立一次方程式Ax=bの解xを求める
+x = A \ b
+
+#LinearAlgebraパッケージを用いても一次方程式の解を求めることができるが、上記の方法の方が早い
 using LinearAlgebra
 A = [1 2 3; 4 1 6; 7 8 1]
+#ここでベクトル化をしているが、基本的にベクトル化をせずにシンプルに3:5と書いた方が早い
 b = Vector(3:5)
 #連立一次方程式Ax=bの解xを求める
 x = A \ b
