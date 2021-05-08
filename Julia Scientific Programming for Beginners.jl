@@ -9,9 +9,11 @@ x = 10
 y = 1.0
 
 x = 10
+#データ型はInt(整数)となる
 typeof(x)
 
 y = 1.0
+#データ型はfloat(浮動小数点)となる
 typeof(y)
 
 x = 10
@@ -49,6 +51,10 @@ c[1]
 c = "Julia"
 #"Julia"の2文字目から4文字目までを取り出す
 c[2:4]
+
+c = "Julia"
+#"Julia"の2文字目から4文字目までを取り出す
+@view(c[2:4])
 
 c = "Julia"
 #"Julia"が何文字かを調べる
@@ -119,7 +125,7 @@ x/y
 
 x = 3
 y = 5
-#ｙをxで割った余りを計算
+#yをxで割った余りを計算
 y % x
 
 x = 3
@@ -127,8 +133,12 @@ y = 5
 #xのy乗を計算
 x ^ y
 
+x = 3
+y = 5
 x > y
 
+x = 3
+y = 5
 x < y
 
 x = 1
@@ -171,6 +181,7 @@ isinf(y)
 
 a = (0,1,2,3,4,5)
 
+#型はtupleとなる
 typeof(a)
 
 b = 2,3,4,5
@@ -653,7 +664,7 @@ end
 hello("Julia")
 
 #帰ってきたものを変数に入れる
-h = hello("Ken")
+h = hello("World")
 
 hello(name) = "Hello $(name)"
 
@@ -787,7 +798,7 @@ close(file)
 
 #csvなど、tｘt以外のファイルも同様にして読み込める
 loc = ".\\Julia_Scientific_Programming_for_Beginners\\"
-filename = "temp_2019_tokyo.csv"
+filename = "temp_2020_tokyo.csv"
 file = open(loc*filename)
 
 #csvファイルの値を格納する配列を用意する
@@ -860,7 +871,7 @@ Mx = matplotlib.ticker.MultipleLocator(1)
 ax.xaxis.set_major_locator(Mx)
 
 #y軸の上限を設定する
-ylim(0, 550)
+ylim(0, 350)
 
 #横軸に平均気温、縦軸に降水量をとった際の散布図を作成する
 #プロットを作成することを宣言
@@ -871,7 +882,7 @@ xlabel("Temperature [℃]")
 ylabel("Precipitation [mm]")
 grid("on")
 xlim(0, 30)
-ylim(0, 600)
+ylim(0, 350)
 
 #正規分布に従う乱数を発生
 x = randn(10000)
@@ -922,6 +933,7 @@ subplot(2, 1, 2)
 plot(x, cos.(x),"--", label = "cosine")
 legend()
 
+#描画した画像を保存
 savefig(".\\Julia_Scientific_Programming_for_Beginners/image1.png")
 
 #データフレームのインストール
@@ -997,7 +1009,7 @@ Pkg.add("CSV")
 
 using CSV
 loc = ".\\Julia_Scientific_Programming_for_Beginners\\"
-filename = "temp_2019_tokyo.csv"
+filename = "temp_2020_tokyo.csv"
 df = CSV.read(loc * filename, DataFrame, header = true, delim = ",")
 
 Pkg.add("StatsPlots")
@@ -1005,7 +1017,7 @@ Pkg.add("StatsPlots")
 using DataFrames
 using CSV
 loc = ".\\Julia_Scientific_Programming_for_Beginners\\"
-filename = "temp_2019_tokyo.csv"
+filename = "temp_2020_tokyo.csv"
 df = CSV.read(loc * filename, DataFrame, header = true, delim = ",")
 
 using StatsPlots
@@ -1225,3 +1237,5 @@ x = 5
 x ^ 3
 
 exp(im * π)
+
+
